@@ -21,7 +21,6 @@ public class BaseTest {
             //FirefoxProfile firefoxProfile = new FirefoxProfile();
             //driver = new FirefoxDriver(firefoxProfile);
             driver = new FirefoxDriver();
-
         } else if (browser.equals("IE")) {
             driver = new InternetExplorerDriver();
         } else if (browser.equals("Chrome")) {
