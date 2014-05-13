@@ -12,7 +12,7 @@ public class Data {
     public static final String BROWSER_HTML_UNIT            = "HtmlUnit";
 
     //User
-    public static final String TEST_USER_NAME              = "testuser";
+    public static final String TEST_USER_NAME              = "ftestuser";
     public static final String TEST_USER_PASSWORD          = "testuser";
     public static final String TEST_USER_FULL_NAME         = "Test User";
     public static final String TEST_USER_EMAIL             = "testuser@test.com";

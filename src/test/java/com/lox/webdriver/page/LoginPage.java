@@ -18,9 +18,6 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = ".//*[@id='content']/div[3]/div/section/div/form/div[4]/button")
     private WebElement loginButton;
 
-    @FindBy(xpath = "html/body/header[1]/div/div/ul/li[1]/a/span")
-    private WebElement headerUsername;
-
     public LoginPage(WebDriver driver) {
         super(driver);
     }

@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -24,16 +25,19 @@ public class BasePage {
     public static final String SITE_URL = Data.SITE_URL;
 
     @FindBy(xpath = "html/body/header[1]/div/nav/ul/li[1]/a")
-    private WebElement loginLink;
+    public WebElement loginLink;
 
     @FindBy(xpath = ".//*[@class='icon-signout']")
-    private WebElement logoutLink;
+    public WebElement logoutLink;
 
     @FindBy(xpath = "html/body/header[1]/div/nav/ul/li[2]/a")
-    private WebElement registerLink;
+    public WebElement registerLink;
 
     @FindBy(xpath = ".//*[@class='username']")
-    private WebElement loggedInUserNameLink;
+    public WebElement loggedInUserNameLink;
+
+    @FindBy(xpath = "html/body/header[1]/div/div/ul/li[1]/a/span")
+    public WebElement headerUsername;
 
     protected BasePage verifyPage() {
         verifyHeader();
@@ -115,6 +119,18 @@ public class BasePage {
                 return driver.findElement(locator);
             }
         };
+    }
+
+    public BasePage doLogout() {
+        try{
+            if (logoutLink.isDisplayed()){
+                logoutLink.click();
+                return PageFactory.initElements(driver, HomePage.class);
+            }
+        }catch (Exception ex){
+            //Do Nothing
+        }
+        return PageFactory.initElements(driver, LoginPage.class);
     }
 
 

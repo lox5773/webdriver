@@ -8,7 +8,13 @@ public class LoginTest extends BaseTest {
     public void before(){
         super.before();
         gotoRegisterPage()
-                .doRegistrationWith(TEST_USER_NAME, TEST_USER_FULL_NAME, TEST_USER_EMAIL, TEST_USER_PASSWORD);
+                .doRegistrationWith(TEST_USER_NAME, TEST_USER_FULL_NAME, TEST_USER_EMAIL, TEST_USER_PASSWORD)
+                .doLogout();
+    }
+
+    public void after(){
+        //write code here to delete user TEST_USER_NAME
+        super.after();
     }
 
     @Test

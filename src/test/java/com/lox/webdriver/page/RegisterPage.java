@@ -13,9 +13,6 @@ public class RegisterPage extends BasePage {
 
     public static final String URL = SITE_URL + "/user/register";
 
-    @FindBy(xpath = "html/body/header[1]/div/nav/ul/li[2]/a")
-    WebElement registerButton;
-
     @FindBy(xpath = ".//*[@id='field-username']")
     WebElement regUsernameField;
 
@@ -42,7 +39,7 @@ public class RegisterPage extends BasePage {
     }
 
     public DashboardPage doRegistration() {
-        registerButton.click();
+        registerLink.click();
         regUsernameField.sendKeys(TEST_USER1_NAME);
         regFullNameField.sendKeys(TEST_USER1_FULL_NAME);
         regEmailField.sendKeys(TEST_USER1_EMAIL);
@@ -53,7 +50,7 @@ public class RegisterPage extends BasePage {
     }
 
     public DashboardPage doRegistrationWith(String userName, String fullName, String email, String password) {
-        registerButton.click();
+        registerLink.click();
         regUsernameField.sendKeys(userName);
         regFullNameField.sendKeys(fullName);
         regEmailField.sendKeys(email);
@@ -64,7 +61,7 @@ public class RegisterPage extends BasePage {
     }
 
     public RegisterPage doRegistrationWithoutRequiredFields() {
-        registerButton.click();
+        registerLink.click();
         regUsernameField.sendKeys(TEST_USER1_NAME);
         regCreateAccountBtn.click();
         return PageFactory.initElements(driver, RegisterPage.class);

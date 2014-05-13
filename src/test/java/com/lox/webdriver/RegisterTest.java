@@ -24,4 +24,9 @@ public class RegisterTest extends BaseTest {
                 .verifyUnsuccesfulRegistration();
     }
 
+    public void after(){
+        //write code here to delete user TEST_USER_NAME
+        super.after();
+    }
+
 }
