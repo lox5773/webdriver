@@ -1,20 +1,39 @@
 package com.lox.webdriver.page;
 
+import com.google.common.base.Function;
+import com.lox.webdriver.Data;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class BasePage {
 
-    public static final String SITE_URL = "http://demo.ckan.org";
+   WebDriver driver;
+
+    BasePage(WebDriver driver){
+        this.driver = driver;
+    }
+
+    public static final String SITE_URL = Data.SITE_URL;
 
     @FindBy(xpath = "html/body/header[1]/div/nav/ul/li[1]/a")
     private WebElement loginLink;
 
+    @FindBy(xpath = ".//*[@class='icon-signout']")
+    private WebElement logoutLink;
+
     @FindBy(xpath = "html/body/header[1]/div/nav/ul/li[2]/a")
     private WebElement registerLink;
+
+    @FindBy(xpath = ".//*[@class='username']")
+    private WebElement loggedInUserNameLink;
 
     protected BasePage verifyPage() {
         verifyHeader();
@@ -36,4 +55,93 @@ public class BasePage {
     protected BasePage verifyBody() {
         return this;
     }
+
+    public BasePage verifySuccessLogin(String userFullName) {
+        assertThat(loggedInUserNameLink.getText(), is(userFullName));
+        return this;
+    }
+
+    public BasePage verifyUnsuccessfulLogin() {
+        assertThat(loginLink.isDisplayed(), is(true));
+        return this;
+    }
+
+    public void waitForElement(final By byType){
+        new WebDriverWait(driver, 10)
+                .until(new ExpectedCondition<WebElement>() {
+
+                    @Override
+                    public WebElement apply(WebDriver webDriver) {
+                        try
+                        {
+                            return driver.findElement(byType);
+                        }
+                        catch (Exception e)
+                        {
+                            return null;
+                        }
+                    }
+
+                });
+    }
+
+    /*public void WaitForElement1(By byType)
+    {
+        WebDriverWait wait = new WebDriverWait(driver, *//**//*seconds=*//**//*10);
+                WebElement myDynamicElement = wait.Until<WebElement>((d) =>
+        {
+            try
+            {
+                return d.FindElement(byType);
+            }
+            catch (Exception e)
+            {
+                log.Error(e.Message + byType.ToString());
+                return null;
+            }
+        });
+    }
+    */
+    public void waitForElement3(By byType)
+    {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(byType)));
+        //wait.until(presenceOfElementLocated(byType));
+    }
+
+    Function<WebDriver, WebElement> presenceOfElementLocated(final By locator) {
+        return new Function<WebDriver, WebElement>() {
+            public WebElement apply(WebDriver driver) {
+                return driver.findElement(locator);
+            }
+        };
+    }
+
+
+
+
+
+
+
+
+
+    /*public static void WaitForElement(By by)
+    {
+        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        wait.Until<bool>((d) =>
+            {
+        try
+        {
+            if (d.FindElement(by).Displayed)
+                return true;
+            else
+                return false;
+        }
+        catch (NoSuchElementException e)
+        {
+            return false;
+        }
+
+        });
+    }*/
 }
