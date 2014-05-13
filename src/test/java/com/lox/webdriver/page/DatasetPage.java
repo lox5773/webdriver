@@ -1,10 +1,14 @@
 package com.lox.webdriver.page;
 
+import com.lox.webdriver.Data;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+
+import static com.lox.webdriver.Data.*;
 
 public class DatasetPage extends BasePage {
 
@@ -14,7 +18,7 @@ public class DatasetPage extends BasePage {
     @FindBy(xpath = "html/body/header[2]/div/div/nav/ul/li[1]/a")
     WebElement dataSetsTab;
 
-    @FindBy(xpath = "html/body/div[1]/div/div[2]/div/a")
+    @FindBy(xpath = "html/body/div[1]/div/div[3]/div/section[1]/div/div/a")
     WebElement addDatasetButton;
 
     @FindBy(id = "field-title")
@@ -73,24 +77,26 @@ public class DatasetPage extends BasePage {
         return this;
     }
 
-    public void createDataSet() throws InterruptedException{
-
-       /* WebDriverWait wait = new WebDriverWait(driver, 20);
+    public DatasetPage createDataSet() {
 
         dataSetsTab.click();
         addDatasetButton.click();
+
+
         datasetTitleField.sendKeys(TEST_DATASET1);
         datasetDescriptionField.sendKeys(TEST_DATASET1_DESCRIPTION);
         datasetTagsField.sendKeys(TEST_DATASET1_TAGS);
         datasetTagsField.sendKeys(Keys.ENTER);
         datasetLicenseField.click();
 
-        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("html/body/div[3]/ul")));
+        return this;
+
+        /*//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("html/body/div[3]/ul")));
 
         List<WebElement> options = datasetLicenseList;
         for (WebElement option : options) {
 
-            if(config.getProperty("datasetLicense").equals(option.getText())){
+            if(LICENSE_OTHER.equals(option.getText())){
                 option.click();
                 System.out.println("Clicking");
                 driver = getDriver();
@@ -112,5 +118,9 @@ public class DatasetPage extends BasePage {
 
         }*/
 
+    }
+
+    public DatasetPage verifyDatasetCreatedSuccessfully() {
+        return this;
     }
 }

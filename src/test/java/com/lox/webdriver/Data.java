@@ -2,7 +2,7 @@ package com.lox.webdriver;
 
 public class Data {
 
-    public static final String SITE_URL                     = "http://demo.ckan.org";
+    public static final String SITE_URL                     = "http://sl-dev-intersect-01.dev.test";
     public static final String NOW                          = "_" + System.currentTimeMillis();
 
     //Browser
@@ -12,7 +12,7 @@ public class Data {
     public static final String BROWSER_HTML_UNIT            = "HtmlUnit";
 
     //User
-    public static final String TEST_USER_NAME              = "ftestuser";
+    public static final String TEST_USER_NAME              = "testuser";
     public static final String TEST_USER_PASSWORD          = "testuser";
     public static final String TEST_USER_FULL_NAME         = "Test User";
     public static final String TEST_USER_EMAIL             = "testuser@test.com";
@@ -35,7 +35,6 @@ public class Data {
     public static final String TEST_DATASET1_TAGS          = "tag1";
 
 
-
-    public static final String TEST_DATASET2                = "TestDataset2";
-    public static final String TEST_DATASET3                = "TestDataset3";
+    //License
+    public static final String LICENSE_OTHER                = "Other (Open)";
 }
