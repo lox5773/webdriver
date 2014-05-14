@@ -1,6 +1,6 @@
 package com.lox.webdriver.page;
 
-import com.lox.webdriver.Data;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,11 +8,12 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-import static com.lox.webdriver.Data.*;
+import static com.lox.webdriver.Data.TEST_DATASET1;
+import static com.lox.webdriver.Data.TEST_DATASET1_DESCRIPTION;
 
-public class DatasetPage extends BasePage {
+public class DatasetCreationPage extends BasePage {
 
-    public static final String URL = SITE_URL + "/dataset";
+    public static final String URL = SITE_URL + "/dataset/new";
 
 
     @FindBy(xpath = "html/body/header[2]/div/div/nav/ul/li[1]/a")
@@ -24,14 +25,14 @@ public class DatasetPage extends BasePage {
     @FindBy(id = "field-title")
     WebElement datasetTitleField;
 
-    @FindBy(xpath = "html/body/div[1]/div/div[3]/div[2]/section/div/form/div[3]/div/textarea")
+    @FindBy(xpath = ".//*[@id='field-notes']")
     WebElement datasetDescriptionField;
 
     @FindBy(xpath = "html/body/div[1]/div/div[3]/div[2]/section/div/form/div[4]/div/div/ul/li/input")
     WebElement datasetTagsField;
 
-    @FindBy(xpath = "html/body/div[1]/div/div[3]/div[2]/section/div/form/div[5]/div/div/a/div/b")  //arrowbtn xpath
-    WebElement datasetLicenseField;
+    @FindBy(xpath = ".//*[@id='s2id_field-license']/a/span[2]/b")  //arrowbtn xpath
+    WebElement datasetLicenseDropdownButton;
 
     @FindBy(xpath = ".//*[@class='select2-result-label']") //all list's customized xpath
     List<WebElement> datasetLicenseList;
@@ -45,7 +46,7 @@ public class DatasetPage extends BasePage {
     @FindBy(xpath = "html/body/div[1]/div/div[3]/div[2]/section/div/form/div[7]/a")
     WebElement cancelButton;
 
-    @FindBy(xpath = "html/body/div[1]/div/div[3]/div[2]/section/div/form/div[7]/button")
+    @FindBy(xpath = ".//*[@id='content']/div[3]/div/section/div/form/div[6]/button")
     WebElement nextAddDataButton;
 
     @FindBy(id = "field-url")
@@ -69,58 +70,47 @@ public class DatasetPage extends BasePage {
     @FindBy(xpath = "html/body/div[1]/div/div[3]/div[2]/section/div/form/div[6]/button[3]")
     WebElement datasetCancelButton;
 
-    public DatasetPage(WebDriver driver) {
+    @FindBy(xpath = ".//*[@id='content']/div[3]/div/section/div/form/div[1]/div/div/button")
+    WebElement editButton;
+
+    public DatasetCreationPage(WebDriver driver) {
         super(driver);
     }
 
-    public DatasetPage verifyDatasetPage() {
+    public DatasetCreationPage verifyDatasetPage() {
         return this;
     }
 
-    public DatasetPage createDataSet() {
-
-        dataSetsTab.click();
-        addDatasetButton.click();
-
+    public DatasetCreationPage createDataSet() {
 
         datasetTitleField.sendKeys(TEST_DATASET1);
+        datasetTitleField.sendKeys(Keys.ENTER);
+
+        driver.findElement(By.xpath("./*//*[@id='field-name']")).sendKeys(TEST_DATASET1);
+
         datasetDescriptionField.sendKeys(TEST_DATASET1_DESCRIPTION);
-        datasetTagsField.sendKeys(TEST_DATASET1_TAGS);
-        datasetTagsField.sendKeys(Keys.ENTER);
-        datasetLicenseField.click();
+        //datasetTagsField.sendKeys(TEST_DATASET1_TAGS);
+        //datasetTagsField.sendKeys(Keys.ENTER);
+
+
+        selectDropdownValue(By.xpath(".//*[@id='s2id_field-license']/a"), "Other (Open)");
+
+        nextAddDataButton.click();
 
         return this;
+    }
 
-        /*//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("html/body/div[3]/ul")));
+    public void selectDropdownValue(By by, String selectValue) {
+        driver.findElement(by).click();
+        waitForElement(By.xpath(".//*[@id='select2-drop']/div/input"));
+        WebElement textField = driver.findElement(By.xpath(".//*[@id='select2-drop']/div/input"));
+        textField.sendKeys(selectValue);
+        textField.sendKeys(Keys.ENTER);
 
-        List<WebElement> options = datasetLicenseList;
-        for (WebElement option : options) {
-
-            if(LICENSE_OTHER.equals(option.getText())){
-                option.click();
-                System.out.println("Clicking");
-                driver = getDriver();
-            }
-        }
-
-        System.out.println("THERE");
-		*//*List<WebElement> options = driver.findElements(By.xpath("./*//*[@class='select2-result-label']"));
-		for (WebElement option : options) {
-	        if("Other (Not Open)".equals(option.getText()))
-	            option.click();*//*
-
-        datasetOrganizationField.click();
-        List<WebElement> orgOptions = datasetOrganizationList;
-        for(WebElement orgOption : orgOptions){
-            Thread.sleep(3000);
-            if(config.getProperty("datasetOrganization").equals(orgOption.getText()));
-            orgOption.click();
-
-        }*/
 
     }
 
-    public DatasetPage verifyDatasetCreatedSuccessfully() {
+    public DatasetCreationPage verifyDatasetCreatedSuccessfully() {
         return this;
     }
 }
