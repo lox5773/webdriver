@@ -8,7 +8,7 @@ public class DatasetTest extends BaseTest {
 
     @Test
     public void DatasetPage_should_load_successfully(){
-        gotoDatasetPage()
+        gotoDatasetCreationPage()
         .verifyDatasetPage();
     }
 
@@ -17,7 +17,7 @@ public class DatasetTest extends BaseTest {
         gotoLoginPage()
                 .loginAs(TEST_USER_NAME, TEST_USER_PASSWORD);
 
-        gotoDatasetPage()
+        gotoDatasetCreationPage()
                 .createDataSet()
                 .verifyDatasetCreatedSuccessfully();
     }

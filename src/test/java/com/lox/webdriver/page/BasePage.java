@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -71,46 +70,25 @@ public class BasePage {
     }
 
     public void waitForElement(final By byType){
-        new WebDriverWait(driver, 10)
-                .until(new ExpectedCondition<WebElement>() {
-
-                    @Override
-                    public WebElement apply(WebDriver webDriver) {
-                        try
-                        {
-                            return driver.findElement(byType);
-                        }
-                        catch (Exception e)
-                        {
-                            return null;
-                        }
-                    }
-
-                });
+        waitForElement(byType);
     }
 
-    /*public void WaitForElement1(By byType)
-    {
-        WebDriverWait wait = new WebDriverWait(driver, *//**//*seconds=*//**//*10);
-                WebElement myDynamicElement = wait.Until<WebElement>((d) =>
-        {
-            try
-            {
-                return d.FindElement(byType);
-            }
-            catch (Exception e)
-            {
-                log.Error(e.Message + byType.ToString());
-                return null;
+    public void waitForElement(final By byType, int secondsToWait){
+        WebDriverWait wait = new WebDriverWait(driver, secondsToWait);
+        wait.until(new ExpectedCondition<WebElement>() {
+
+            @Override
+            public WebElement apply(WebDriver webDriver) {
+                try
+                {
+                    return driver.findElement(byType);
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
             }
         });
-    }
-    */
-    public void waitForElement3(By byType)
-    {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(byType)));
-        //wait.until(presenceOfElementLocated(byType));
     }
 
     Function<WebDriver, WebElement> presenceOfElementLocated(final By locator) {
@@ -132,32 +110,4 @@ public class BasePage {
         }
         return PageFactory.initElements(driver, LoginPage.class);
     }
-
-
-
-
-
-
-
-
-
-    /*public static void WaitForElement(By by)
-    {
-        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-        wait.Until<bool>((d) =>
-            {
-        try
-        {
-            if (d.FindElement(by).Displayed)
-                return true;
-            else
-                return false;
-        }
-        catch (NoSuchElementException e)
-        {
-            return false;
-        }
-
-        });
-    }*/
 }

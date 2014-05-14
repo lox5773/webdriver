@@ -18,12 +18,18 @@ public class Data {
     public static final String TEST_USER_EMAIL             = "testuser@test.com";
 
     public static final String TEST_USER1_NAME              = "testuser1" + NOW;
-    public static final String TEST_USER1_PASSWORD          = "testuser1";
-    public static final String TEST_USER1_FULL_NAME         = "Test User1";
-    public static final String TEST_USER1_EMAIL             = "testuser1@test.com";
+    public static final String TEST_USER1_PASSWORD          = "testuser1" + NOW;
+    public static final String TEST_USER1_FULL_NAME         = "Test User1" + NOW;
+    public static final String TEST_USER1_EMAIL             = "testuser1"+ NOW +"@test.com";
+
+    public static final String TEST_ADMIN_USER_NAME         = "sysadmin";
+    public static final String TEST_ADMIN_USER_PASSWORD     = "sysadmin";
+    public static final String TEST_ADMIN_USER_FULL_NAME    = "sysadmin";
+    public static final String TEST_ADMIN_USER_EMAIL        = "testadminuser@test.com";
 
     //Org
     public static final String TEST_ORG1                    = "TestOrg1";
+    public static final String TEST_ORG1_DESCRIPTION        = "TestOrg1 Description";
 
     //Group
     public static final String TEST_GROUP1                  = "TestGroup1";

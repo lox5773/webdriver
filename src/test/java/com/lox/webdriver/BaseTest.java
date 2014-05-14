@@ -36,7 +36,7 @@ public class BaseTest {
 
     @After
     public void after() {
-        driver.close();
+        //driver.close();
     }
 
     protected HomePage gotoHomePage() {
@@ -44,9 +44,9 @@ public class BaseTest {
         return PageFactory.initElements(driver, HomePage.class);
     }
 
-    protected OrganizationPage gotoOrganizationPage() {
-        driver.get(OrganizationPage.URL);
-        return PageFactory.initElements(driver, OrganizationPage.class);
+    protected OrganizationCreationPage gotoOrganizationCreationPage() {
+        driver.get(OrganizationCreationPage.URL);
+        return PageFactory.initElements(driver, OrganizationCreationPage.class);
     }
 
     protected GroupPage gotoGroupPage() {
@@ -54,9 +54,9 @@ public class BaseTest {
         return PageFactory.initElements(driver, GroupPage.class);
     }
 
-    protected DatasetPage gotoDatasetPage() {
-        driver.get(DatasetPage.URL);
-        return PageFactory.initElements(driver, DatasetPage.class);
+    protected DatasetCreationPage gotoDatasetCreationPage() {
+        driver.get(DatasetCreationPage.URL);
+        return PageFactory.initElements(driver, DatasetCreationPage.class);
     }
 
     protected SearchPage gotoSearchPage() {
