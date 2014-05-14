@@ -1,5 +1,7 @@
 package com.lox.webdriver.page;
 
+import java.io.IOException;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -33,6 +35,9 @@ public class RegisterPage extends BasePage {
 
     @FindBy(xpath = ".//*[@class='error-explanation alert alert-error ']")
     WebElement errorPanel;
+    
+    @FindBy(xpath = ".//*[@class='page-heading']")
+    WebElement registerHeading;
 
     public RegisterPage(WebDriver driver) {
         super(driver);
@@ -64,10 +69,15 @@ public class RegisterPage extends BasePage {
         registerLink.click();
         regUsernameField.sendKeys(TEST_USER1_NAME);
         regCreateAccountBtn.click();
+        takeScreenShot("Registration Failed");
         return PageFactory.initElements(driver, RegisterPage.class);
     }
 
-    public RegisterPage verifyRegisterPage() {
+   
+	public RegisterPage verifyRegisterPage() {
+    	assertThat(registerHeading.isDisplayed(), is(true));
+    	assertThat(registerHeading.getText().contains("Register for an Account"), is(true));
+    	 takeScreenShot("Registration Page");
         return this;
     }
 
