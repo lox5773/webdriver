@@ -2,7 +2,7 @@ package com.lox.webdriver.page;
 
 import org.openqa.selenium.WebDriver;
 
-import static com.lox.webdriver.Data.TEST_USER1_FULL_NAME;
+import static com.lox.webdriver.Data.*;
 
 public class DashboardPage extends BasePage {
 

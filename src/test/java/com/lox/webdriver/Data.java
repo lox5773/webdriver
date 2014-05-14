@@ -2,8 +2,9 @@ package com.lox.webdriver;
 
 public class Data {
 
-    public static final String SITE_URL                     = "http://sl-dev-intersect-01.dev.test";
+    public static final String BASE_URL                     = "http://sl-dev-intersect-01.dev.test";
     public static final String NOW                          = "_" + System.currentTimeMillis();
+    public static final int DEFAULT_WAIT_SECONDS            = 3;
 
     //Browser
     public static final String BROWSER_MOZILLA              = "Mozilla";
@@ -36,7 +37,7 @@ public class Data {
     public static final String TEST_GROUP1_DESCRIPTION      = "TestGroup1 Description";
 
     //Dataset
-    public static final String TEST_DATASET1                = "TestDataset1";
+    public static final String TEST_DATASET1                = "TestDataset1" + NOW;
     public static final String TEST_DATASET1_DESCRIPTION    = "TestDataset1 Description";
     public static final String TEST_DATASET1_TAGS          = "tag1";
 

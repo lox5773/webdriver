@@ -7,7 +7,7 @@ import static com.lox.webdriver.Data.*;
 public class DatasetTest extends BaseTest {
 
     @Test
-    public void DatasetPage_should_load_successfully(){
+    public void datasetPage_should_load_successfully(){
         gotoDatasetCreationPage()
         .verifyDatasetPage();
     }

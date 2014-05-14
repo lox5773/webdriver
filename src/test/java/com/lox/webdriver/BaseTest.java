@@ -49,6 +49,11 @@ public class BaseTest {
         return PageFactory.initElements(driver, OrganizationCreationPage.class);
     }
 
+    protected OrganizationListPage gotoOrganizationListPage() {
+        driver.get(OrganizationListPage.URL);
+        return PageFactory.initElements(driver, OrganizationListPage.class);
+    }
+
     protected GroupPage gotoGroupPage() {
         driver.get(GroupPage.URL);
         return PageFactory.initElements(driver, GroupPage.class);

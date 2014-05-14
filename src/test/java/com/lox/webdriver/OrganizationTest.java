@@ -1,5 +1,6 @@
 package com.lox.webdriver;
 
+import com.lox.webdriver.page.OrganizationListPage;
 import org.junit.Test;
 
 import static com.lox.webdriver.Data.*;
@@ -16,7 +17,7 @@ public class OrganizationTest extends BaseTest {
         gotoLoginPage()
                 .loginAs(TEST_ADMIN_USER_NAME, TEST_ADMIN_USER_PASSWORD);
 
-        gotoOrganizationCreationPage()
+        gotoOrganizationListPage()
                 .deleteOrganization(TEST_ORG1);
 
         super.after();

@@ -1,8 +1,7 @@
 package com.lox.webdriver.page;
 
-import com.google.common.base.Function;
-import com.lox.webdriver.Data;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,18 +9,21 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import static com.lox.webdriver.Data.BASE_URL;
+import static com.lox.webdriver.Data.DEFAULT_WAIT_SECONDS;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class BasePage {
 
-   WebDriver driver;
+
+    WebDriver driver;
 
     BasePage(WebDriver driver){
         this.driver = driver;
     }
 
-    public static final String SITE_URL = Data.SITE_URL;
+    public static final String SITE_URL = BASE_URL;
 
     @FindBy(xpath = "html/body/header[1]/div/nav/ul/li[1]/a")
     public WebElement loginLink;
@@ -70,7 +72,7 @@ public class BasePage {
     }
 
     public void waitForElement(final By byType){
-        waitForElement(byType);
+        waitForElement(byType, DEFAULT_WAIT_SECONDS);
     }
 
     public void waitForElement(final By byType, int secondsToWait){
@@ -91,14 +93,6 @@ public class BasePage {
         });
     }
 
-    Function<WebDriver, WebElement> presenceOfElementLocated(final By locator) {
-        return new Function<WebDriver, WebElement>() {
-            public WebElement apply(WebDriver driver) {
-                return driver.findElement(locator);
-            }
-        };
-    }
-
     public BasePage doLogout() {
         try{
             if (logoutLink.isDisplayed()){
@@ -109,5 +103,13 @@ public class BasePage {
             //Do Nothing
         }
         return PageFactory.initElements(driver, LoginPage.class);
+    }
+
+    public void selectDropdownValue(By by, String selectValue) {
+        driver.findElement(by).click();
+        waitForElement(By.xpath(".//*[@id='select2-drop']/div/input"));
+        WebElement textField = driver.findElement(By.xpath(".//*[@id='select2-drop']/div/input"));
+        textField.sendKeys(selectValue);
+        textField.sendKeys(Keys.ENTER);
     }
 }

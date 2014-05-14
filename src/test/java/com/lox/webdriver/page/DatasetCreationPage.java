@@ -100,16 +100,6 @@ public class DatasetCreationPage extends BasePage {
         return this;
     }
 
-    public void selectDropdownValue(By by, String selectValue) {
-        driver.findElement(by).click();
-        waitForElement(By.xpath(".//*[@id='select2-drop']/div/input"));
-        WebElement textField = driver.findElement(By.xpath(".//*[@id='select2-drop']/div/input"));
-        textField.sendKeys(selectValue);
-        textField.sendKeys(Keys.ENTER);
-
-
-    }
-
     public DatasetCreationPage verifyDatasetCreatedSuccessfully() {
         return this;
     }
